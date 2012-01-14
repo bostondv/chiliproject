@@ -28,3 +28,7 @@ doc/app
 /Gemfile.lock
 /Gemfile.local
 /.rvmrc*
+# Added by boston
+/.ssh
+/config/setup_load_paths.rb
+
