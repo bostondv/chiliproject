@@ -1,0 +1,79 @@
+'en':
+  label_all_git: Automatically Initialize Git Repositories For New Projects
+  label_delete_git_repositories: Delete Git Repository When Project is Deleted
+  label_git_server: Gitolite Server Domain
+  label_http_server: HTTP Server Domain (for git http urls)
+  label_git_user: Git Username
+  label_gitolite_identity_public_key_file: Gitolite SSH Identity File (Public Key)
+  label_gitolite_identity_file: Gitolite SSH Identity File (Private Key)
+  label_git_repository_base_path: Git Repository Base Path (Relative to git user home)
+
+  field_git_daemon: Git Daemon
+  field_git_http: Git Smart HTTP
+  field_notify_cia: Notify CIA.vc
+
+
+  label_git_show_urls: "Show checkout URL's"
+  label_enabled: Enabled
+  label_disabled: Disabled
+  label_https_only: HTTPS Only
+  label_https_and_http: HTTPS and HTTP
+
+  label_permissions_header: Required Permissions
+  label_sudo_web_to_git_user: Web user is able to sudo to Git user?
+  label_sudo_git_to_web_user: Git user is able to sudo to Web user?
+
+
+  label_copy_to_clipboard: "Copy to clipboard"
+
+
+
+
+  label_git_hook_header: Repository Hooks
+  label_git_hook_debug: Run hooks in Debug mode
+  label_git_hooks_are_asynchronous: Run hooks asynchronously
+  label_hook_installed: Hook installed
+
+  label_public_keys: Public keys
+  label_public_key_new: New public key
+  field_public_key: Key
+  notice_public_key_updated: Public key was successfully updated.
+  notice_public_key_added: Public key was successfully added.
+  label_key_cannot_be_changed_please_create_new_key: 'The key cannot be altered anymore. However, you can deactivate it and create a new one.'
+  activerecord:
+    errors:
+      messages:
+        'may not be changed': 'may not be changed'
+
+  label_git_cache_max_time: Max Cache Time
+  label_git_cache_max_elements: Max Cache Elements
+  label_git_cache_max_size: Max Cache Element Size
+  label_git_cache_parameters: Git Cache Parameters
+
+  label_no_public_keys: No Public Keys Defined
+
+
+
+  project_not_found: 'No project was found with the identifier "%{identifier}"'
+  cia_not_enough_permissions: You don't have the required permissions to test CIA.vc notifications.
+  field_notify_cia_test: Test Notification
+  cia_notification_ok: Notification to CIA.vc sent.
+
+  label_update_all_hooks: Update ALL repositories hook settings
+
+  field_private_key: Private Key
+  field_private_key_warning: "Do not use your own Private Key!<br/>Please generate a new one and upload it to the mirror server."
+  label_mirror_create: Create Repository Mirror
+  label_mirror_delete: Delete Repository Mirror
+  label_mirror_edit: Edit Repository Mirror
+  mirror_notice_deleted: Mirror was successfully deleted
+  mirror_notice_created: Mirror was successfully created
+  mirror_notice_updated: Mirror was successfully updated
+  mirror_notice_create_failed: Failed to create mirror
+
+  button_push: Push
+  button_push_title: "Push To Mirror"
+  mirror_push_info_html: "Pushing changes to mirror <b>%{mirror_url}</b> ... %{status}"
+  mirror_push_output_label: 'Output:'
+  mirror_push_sucess: Success.
+  mirror_push_fail: Failed!
