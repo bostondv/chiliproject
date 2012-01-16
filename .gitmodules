@@ -1,3 +1,6 @@
 [submodule "public/themes/chili-pomelo"]
 	path = public/themes/chili-pomelo
 	url = git@github.com:bostondv/chili-pomelo
+[submodule "vendor/plugins/redmine-gitolite"]
+	path = vendor/plugins/redmine-gitolite
+	url = git://github.com/splendeo/redmine-gitolite.git
