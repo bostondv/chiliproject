@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/redmine_mypageparts_collection"]
 	path = vendor/plugins/redmine_mypageparts_collection
 	url = git://github.com/alminium/redmine_mypageparts_collection.git
+[submodule "vendor/plugins/redmine_auto_assigned_user"]
+	path = vendor/plugins/redmine_auto_assigned_user
+	url = https://github.com/GMLudo/redmine_auto_assigned_user.git
