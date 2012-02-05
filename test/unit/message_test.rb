@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -14,7 +14,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class MessageTest < ActiveSupport::TestCase
-  fixtures :projects, :roles, :members, :member_roles, :boards, :messages, :users, :watchers
+  fixtures :all
 
   def setup
     Setting.notified_events = ['message_posted']
@@ -142,7 +142,7 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test "email notifications for creating a message" do
-    assert_difference("ActionMailer::Base.deliveries.count") do
+    assert_difference("ActionMailer::Base.deliveries.count", 3) do
       message = Message.new(:board => @board, :subject => 'Test message', :content => 'Test message content', :author => @user)
       assert message.save
     end

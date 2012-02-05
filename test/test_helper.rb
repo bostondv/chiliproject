@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -47,7 +47,8 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   def setup
     super
-    Setting.clear_cache
+    Setting.use_caching = false
+    Rails.cache.clear
   end
 
   def log_user(login, password)

@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -285,7 +285,15 @@ module ApplicationHelper
   def principals_check_box_tags(name, principals)
     s = ''
     principals.sort.each do |principal|
-      s << "<label>#{ check_box_tag name, principal.id, false } #{h principal}</label>\n"
+      s << "<label style='display:block;'>#{ check_box_tag name, principal.id, false } #{h principal}</label>\n"
+    end
+    s
+  end
+
+  def projects_check_box_tags(name, projects)
+    s = ''
+    projects.each do |project|
+      s << "<label>#{ check_box_tag name, project.id, false } #{h project}</label>\n"
     end
     s
   end
@@ -464,7 +472,7 @@ module ApplicationHelper
       liquid_variables = get_view_instance_variables_for_liquid
       liquid_variables.merge!({'current_user' => User.current})
       liquid_variables.merge!({'toc' => '{{toc}}'}) # Pass toc through to replace later
-      liquid_variables.merge!(ChiliProject::Liquid::Variables.macro_backwards_compatibility)
+      liquid_variables.merge!(ChiliProject::Liquid::Variables.all)
 
       # Pass :view in a register so this view (with helpers) can be used inside of a tag
       text = liquid_template.render(liquid_variables, :registers => {:view => self, :object => obj, :attribute => attr})
@@ -479,14 +487,17 @@ module ApplicationHelper
         Rails.logger.debug msg
       end
     rescue Liquid::SyntaxError => exception
+      msg = "[Liquid Syntax Error] #{exception.message}"
       if Rails.logger && Rails.logger.debug?
-        msg = "[Liquid Syntax Error] #{exception.message}\n:\n#{exception.backtrace.join("\n")}"
-        msg << "\n\n"
-        Rails.logger.debug msg
+        log_msg = "#{msg}\n"
+        log_msg << exception.backtrace.collect{ |str| "    #{str}" }.join("\n")
+        log_msg << "\n\n"
+        Rails.logger.debug log_msg
       end
 
       # Skip Liquid if there is a syntax error
-      text = h(input_text)
+      text = content_tag(:div, msg, :class => "flash error")
+      text << h(input_text)
     end
 
     @parsed_headings = []
@@ -912,6 +923,12 @@ module ApplicationHelper
   # +user+ can be a User or a string that will be scanned for an email address (eg. 'joe <joe@foo.bar>')
   def avatar(user, options = { })
     if Setting.gravatar_enabled?
+      if user.is_a?(Group)
+        size = options[:size] || 50
+        size = "#{size}x#{size}" # image_tag uses WxH
+        options[:class] ||= 'gravatar'
+        return image_tag("group.png", options.merge(:size => size))
+      end
       options.merge!({:ssl => (defined?(request) && request.ssl?), :default => Setting.gravatar_default})
       email = nil
       if user.respond_to?(:mail)

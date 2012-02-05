@@ -46,6 +46,7 @@
         <li class="drop-down">
           <%= link_to l(:label_project_plural), { :controller => 'projects', :action => 'index' }, :class => "projects" %>
           <ul style="display:none;">
+            <li><%= link_to l(:label_project_all), { :controller => 'projects', :action => 'index' }, :class => "projects separator" %></li>
             <%
             project_content = ''
             project_tree(User.current.projects.all) do |project, level|
@@ -57,6 +58,7 @@
             <%= project_content %>
           </ul>
         </li>
+        <% if more_top_menu_items.present? || User.current.admin? %>
         <li class="drop-down" id="more-menu">
           <a class="more" href="#"><%= l(:label_more) %></a>
           <ul style="display:none;">
@@ -71,6 +73,7 @@
             <% end %>
           </ul>
         </li>
+        <% end %>
         <li>
           <%= render_menu_node(help_menu_item) %>
           <% unless User.current.logged? %>
@@ -113,9 +116,12 @@
   <% end %>
   <div id="main" class="<%= side_displayed ? '' : "nosidebar" %>">
     <% if (side_displayed) %>
-      <div id="main-menu">
-        <%= main_menu %>
-        <%= yield :main_menu %>
+      <div id="side-container">
+        <div id="main-menu">
+          <%= main_menu %>
+          <%= yield :main_menu %>
+        </div>
+
       <% if display_sidebar %>
         <!-- Sidebar -->
         <div id="sidebar">
@@ -142,6 +148,7 @@
   </div>
 
   <div id="ajax-indicator" style="display:none;"><span><%= l(:label_loading) %></span></div>
+  <div id="dialog-window" style="display:none;"></div>
 
 </div>
 <%= call_hook :view_layouts_base_body_bottom %>

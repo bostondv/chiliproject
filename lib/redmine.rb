@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -116,6 +116,9 @@ Redmine::AccessControl.map do |map|
   map.project_module :documents do |map|
     map.permission :manage_documents, {:documents => [:new, :edit, :destroy, :add_attachment]}, :require => :loggedin
     map.permission :view_documents, :documents => [:index, :show, :download]
+    map.permission :view_document_watchers, {}
+    map.permission :add_document_watchers, {:watchers => :new}
+    map.permission :delete_document_watchers, {:watchers => :destroy}
   end
 
   map.project_module :files do |map|
@@ -133,6 +136,9 @@ Redmine::AccessControl.map do |map|
     map.permission :edit_wiki_pages, :wiki => [:edit, :update, :preview, :add_attachment]
     map.permission :delete_wiki_pages_attachments, {}
     map.permission :protect_wiki_pages, {:wiki => :protect}, :require => :member
+    map.permission :view_wiki_page_watchers, {}
+    map.permission :add_wiki_page_watchers, {:watchers => :new}
+    map.permission :delete_wiki_page_watchers, {:watchers => :destroy}
   end
 
   map.project_module :repository do |map|
@@ -150,6 +156,14 @@ Redmine::AccessControl.map do |map|
     map.permission :edit_own_messages, {:messages => :edit}, :require => :loggedin
     map.permission :delete_messages, {:messages => :destroy}, :require => :member
     map.permission :delete_own_messages, {:messages => :destroy}, :require => :loggedin
+    map.permission :view_board_watchers, {}
+    map.permission :add_board_watchers, {:watchers => :new}
+    map.permission :delete_board_watchers, {:watchers => :destroy}
+
+    map.permission :view_message_watchers, {}
+    map.permission :add_message_watchers, {:watchers => :new}
+    map.permission :delete_message_watchers, {:watchers => :destroy}
+
   end
 
   map.project_module :calendar do |map|

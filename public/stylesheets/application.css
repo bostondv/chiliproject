@@ -26,7 +26,7 @@ h5, .wiki h4 {font-size: 11px;padding: 2px 10px 1px 0px;margin-bottom: 5px; bord
 
 #quick-search {float:right;}
 
-#main-menu {position: absolute;  bottom: auto;  left:6px; margin-right: -500px;}
+#side-container {position: absolute;  bottom: auto;  left:6px; margin-right: -500px;}
 #main-menu ul {margin: 0;  padding: 0;}
 #main-menu li {
   float: none;
@@ -515,7 +515,7 @@ div#tab-content-members .splitcontentright, div#tab-content-memberships .splitco
 div#tab-content-members fieldset, div#tab-content-memberships fieldset, div#tab-content-users fieldset { padding:1em; margin-bottom: 1em; }
 div#tab-content-members fieldset legend, div#tab-content-memberships fieldset legend, div#tab-content-users fieldset legend { font-weight: bold; }
 div#tab-content-members fieldset label, div#tab-content-memberships fieldset label, div#tab-content-users fieldset label { display: block; }
-div#tab-content-members fieldset div, div#tab-content-users fieldset div { max-height: 400px; overflow:auto; }
+div#tab-content-members fieldset div, div#tab-content-users fieldset div, div#tab-content-memberships fieldset div { max-height: 400px; overflow:auto; }
 
 table.members td.group { padding-left: 20px; background: url(../images/group.png) no-repeat 0% 50%; }
 
@@ -1006,13 +1006,8 @@ img.gravatar {
   background: #fff;
 }
 
-div.issue img.gravatar {
-	float: right;
-	margin: 0 0 0 1em;
-	padding: 5px;
-}
-
-div.issue table img.gravatar {
+div.issue table img.gravatar,
+p.author img.gravatar {
 	height: 14px;
 	width: 14px;
 	padding: 2px;
@@ -1316,6 +1311,9 @@ input:-moz-placeholder {
   height:15px;
   line-height:15px;
 }
+#header li.drop-down li > a.separator {
+ border-bottom: 1px solid #555555;
+}
 #breadcrumb {
 	height:38px;
         line-height:38px;
@@ -1369,12 +1367,12 @@ div#optional_login_fields {
   margin-left:2px;
 }
 /*-------------------------------------------------------------------------------
- * =02 - Main Menu
+ * =02 - Side container
  *
- * This section includes the layout and styles for the left navigation column.
+ * This section includes the layout and styles for the left navigation column and menu.
  ------------------------------------------------------------------------------*/
 
-#main-menu {
+#side-container {
 	width:185px;
         height:100%;
 	position:absolute;
@@ -1791,23 +1789,21 @@ table.files {
 	margin-bottom:20px;
 }
 #history .journal {
-	position:relative;
-	padding-left:50px;
-	margin:0 0 15px;
-	clear:both;
-	min-height:40px;
+  margin:0 0 45px;
+}
+.journal.has-avatar .journal-details {
+  padding-left: 50px;
 }
 .journal .profile-wrap {
-	float:none;
-	position:absolute;
-	left:0;
-	top:0;
+  float: left;
+  margin: 5px 0 0;
 }
+
 .journal h4 {
 	font-size:12px;
 	font-weight:normal;
-	margin-bottom:-1px;
-	position:relative;
+	margin-bottom:10px;
+	padding-right: 0;
 	z-index:5;
 }
 .journal h4 .history-id {
@@ -1815,7 +1811,6 @@ table.files {
 	color:#999;
 }
 .journal .wiki {
-	padding:10px 10px 5px;
 	overflow:auto;
 }
 .journal .contextual {
@@ -1946,12 +1941,6 @@ ul.projects li div.root {
  * This section defines the styles for handling behaviors - popups, flyouts, etc.
  ------------------------------------------------------------------------------*/
 
-.profile-wrap {
-	float:right;
-	position:relative;
-	width:42px;
-	height:42px;
-}
 .profile-box {
 	position:absolute;
 	right:0;
@@ -2286,15 +2275,11 @@ div.issue hr {
 #content h2 + h3 {
 	margin-top:12px;
 }
-div.issue img.gravatar, #history img.gravatar {
-	float:none;
-	margin:0;
-	padding:0;
-}
 p.author {
 	margin-bottom:3px;
 	font-style:italic;
 }
+
 /* add filter select box on non-issue pages */
 fieldset#filters div.add-filter {
 	text-align:left;
@@ -2394,6 +2379,7 @@ div.issue p, div.issue div, #content td {
 }
 #history .journal {
 	clear:left;
+	min-height: 50px;
 	margin-bottom:45px;
 }
 
@@ -2471,6 +2457,8 @@ a.has-thumb img {
 /* Adds a simple rounded corner background */
 .rounded-background { background: #E6E5E5; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; }
 
+/* Used on the wiki to show a page hierarchy/tree */
+.pages-hierarchy { padding-left: 10px; }
 
 /*************************************************************************
 Additional wiki styles

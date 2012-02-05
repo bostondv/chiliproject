@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -23,13 +23,25 @@ class ChiliProject::LiquidTest < ActionView::TestCase
     end
   end
 
-  context "variable_list tag" do
+  context "variables" do
     should "render a list of the current variables" do
-      text = "{% variable_list %}"
+      text = "{{ variables | to_list }}"
       formatted = textilizable(text)
 
       assert formatted.include?('<ul>'), "Not in a list format"
       assert formatted.include?('current_user')
+    end
+
+    should "be lazily evaluated" do
+      text = ["{{ variables | to_list }}"]
+      text << '{% assign foo = \"bar\" %}'
+      text << "{{ variables | to_list }}"
+      formatted = textilizable(text.join("\n"))
+
+      assert (formatted.scan('<ul>').size == 2), "Not in a list format"
+      assert (formatted.scan('current_user').size == 2)
+
+      assert (formatted.scan('foo').size == 1), "Not updated on added variable"
     end
   end
 
@@ -216,6 +228,14 @@ class ChiliProject::LiquidTest < ActionView::TestCase
 
       formatted = textilizable(text)
       assert_match  '&lt;script&gt;alert(&quot;Hello&quot;)&lt;/script&gt;', formatted
+    end
+
+    should "have an error flash" do
+      text =  "{% --- something invalid %}\n"
+      formatted = textilizable(text)
+
+      assert_match /flash error/, formatted
+      assert_match '[Liquid Syntax Error]', formatted
     end
   end
 end

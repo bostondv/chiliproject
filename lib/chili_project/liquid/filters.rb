@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -44,6 +44,26 @@ module ChiliProject
       def replace_first(input, string, replacement = '')
         input.to_s.sub(string){replacement}
       end
+
+      # Get the first element(s) of the passed in array
+      # Example:
+      #    {{ product.images | first | to_img }}
+      def first(array, count=nil)
+        return array.first if count.nil? && array.respond_to?(:first)
+        if array.respond_to?(:[])
+          count.to_i > 0 ? array[0..count.to_i-1] : []
+        end
+      end
+
+      # Get the last element(s) of the passed in array
+      # Example:
+      #    {{ product.images | last | to_img }}
+      def last(array, count=nil)
+        array.last if count=nil? && array.respond_to?(:last)
+        if array.respond_to?(:[])
+          count.to_i > 0 ? array[(count.to_i * -1)..-1] : []
+        end
+      end
     end
 
     module Filters
@@ -53,6 +73,23 @@ module ChiliProject
 
       def strip(input)
         input.to_s.strip
+      end
+
+      def to_list(array, header_or_depth = nil)
+        result = []
+        if header_or_depth.is_a?(String)
+          result << "\np. #{header_or_depth}\n"
+          depth = 1
+        else
+          if header_or_depth.respond_to?(:to_i)
+            depth = [1, header_or_depth.to_i].max
+          else
+            depth = 1
+          end
+        end
+
+        result += (array || []).collect{|elm| "#{"*" * depth.to_i } #{elm.to_s}"}
+        result.join("\n")
       end
     end
 

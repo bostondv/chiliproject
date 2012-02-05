@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -75,8 +75,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_setup
-    # Check the settings cache for each request
-    Setting.check_cache
     # Find the current user
     User.current = find_current_user
   end

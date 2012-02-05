@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -101,6 +101,34 @@ class QueryTest < ActiveSupport::TestCase
     query = Query.new(:project => Project.find(1), :name => '_')
     query.add_filter('done_ratio', '>=', ['40'])
     assert query.statement.include?("#{Issue.table_name}.done_ratio >= 40")
+    find_issues_with_query(query)
+  end
+
+  def test_operator_date_equals
+    query = Query.new(:name => '_')
+    query.add_filter('due_date', '=', ['2011-07-10'])
+    assert_match /issues\.due_date > '2011-07-09 23:59:59(\.9+)?' AND issues\.due_date <= '2011-07-10 23:59:59(\.9+)?/, query.statement
+    find_issues_with_query(query)
+  end
+
+  def test_operator_date_lesser_than
+    query = Query.new(:name => '_')
+    query.add_filter('due_date', '<=', ['2011-07-10'])
+    assert_match /issues\.due_date <= '2011-07-10 23:59:59(\.9+)?/, query.statement
+    find_issues_with_query(query)
+  end
+
+  def test_operator_date_greater_than
+    query = Query.new(:name => '_')
+    query.add_filter('due_date', '>=', ['2011-07-10'])
+    assert_match /issues\.due_date > '2011-07-09 23:59:59(\.9+)?'/, query.statement
+    find_issues_with_query(query)
+  end
+
+  def test_operator_date_between
+    query = Query.new(:name => '_')
+    query.add_filter('due_date', '><', ['2011-06-23', '2011-07-10'])
+    assert_match /issues\.due_date > '2011-06-22 23:59:59(\.9+)?' AND issues\.due_date <= '2011-07-10 23:59:59(\.9+)?/, query.statement
     find_issues_with_query(query)
   end
 

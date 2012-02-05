@@ -2,7 +2,7 @@
 #-- copyright
 # ChiliProject is a project management system.
 #
-# Copyright (C) 2010-2011 the ChiliProject Team
+# Copyright (C) 2010-2012 the ChiliProject Team
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -40,8 +40,6 @@ module ChiliProject::Liquid
     register_tag('child_pages', ChildPages, :html => true)
     register_tag('hello_world', HelloWorld)
     register_tag('include', Include, :html => true)
-    register_tag('tag_list', TagList, :html => true)
-    register_tag('variable_list', VariableList, :html => true)
 
     # Output these tags again as they were typed
     # These are to be handled later
