@@ -1,6 +1,9 @@
 [submodule "public/themes/chili-pomelo"]
 	path = public/themes/chili-pomelo
 	url = git@github.com:bostondv/chili-pomelo
-[submodule "vendor/plugins/redmine-gitolite"]
-	path = vendor/plugins/redmine-gitolite
-	url = git://github.com/splendeo/redmine-gitolite.git
+[submodule "vendor/plugins/redmine_git_hosting"]
+	path = vendor/plugins/redmine_git_hosting
+	url = git://github.com/ericpaulbishop/redmine_git_hosting.git
+[submodule "vendor/plugins/redmine_mypageparts_collection"]
+	path = vendor/plugins/redmine_mypageparts_collection
+	url = git://github.com/alminium/redmine_mypageparts_collection.git
