@@ -10,3 +10,6 @@
 [submodule "vendor/plugins/redmine_auto_assigned_user"]
 	path = vendor/plugins/redmine_auto_assigned_user
 	url = https://github.com/GMLudo/redmine_auto_assigned_user.git
+[submodule "vendor/plugins/redmine_due_date_by_default"]
+	path = vendor/plugins/redmine_due_date_by_default
+	url = https://github.com/TeamRocketScience/redmine_due_date_by_default.git
