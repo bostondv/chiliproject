@@ -17,9 +17,6 @@ group :test do
   gem 'edavis10-object_daddy', :require => 'object_daddy'
   gem 'mocha'
   gem 'capybara'
-
-  platforms :mri_18, :mingw_18 do gem 'ruby-debug' end
-  platforms :mri_19, :mingw_19 do gem 'ruby-debug19', :require => 'ruby-debug' end
 end
 
 group :ldap do
@@ -38,7 +35,7 @@ group :rmagick do
   # the line above this comment block and uncomment the one underneath it to
   # get an rmagick version known to work on older distributions.
   #
-  # The following distributíons are known to *not* ship with a usable
+  # The following distributions are known to *not* ship with a usable
   # ImageMagick version. There might be additional ones.
   #   * Ubuntu 9.10 and older
   #   * Debian Lenny 5.0 and older
